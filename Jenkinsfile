@@ -6,20 +6,22 @@ pipeline {
         }
     }
     stages {
-        try {
-            stage('Input parameters') {
-                steps {
-                    waitUntil {
-                        sh'''
-                            echo "hello world"
-                            '''
+        stage('Input parameters') {
+            steps {
+                waitUntil {
+                    script {
+                        try {
+                            sh'''
+                                echo "hello world"
+                                '''
+                            true
+                        } catch(error) {
+                            input "Retry the job?"
+                            false
+                        }
                     }
                 }
             }
-        } catch(error) {
-            sh'''
-                echo "woooo"
-                '''
         }
     }
 }
