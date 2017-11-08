@@ -12,7 +12,7 @@ pipeline {
                     script {
                         try {
                             sh'''
-                                echo "hello world"
+                                echo "hello world
                                 '''
                             true
                         } catch(error) {
