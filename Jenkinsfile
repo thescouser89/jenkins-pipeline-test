@@ -8,9 +8,11 @@ pipeline {
     stages {
         stage('Input parameters') {
             steps {
-                sh'''
-                echo "hello world"
-                '''
+                waitUntil {
+                    sh'''
+                        echo "hello world"
+                        '''
+                }
             }
         }
     }
