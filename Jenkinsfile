@@ -6,20 +6,20 @@ pipeline {
         }
     }
     stages {
-        stage('Input parameters') {
-            steps {
-                waitUntil {
-                    try {
+        try {
+            stage('Input parameters') {
+                steps {
+                    waitUntil {
                         sh'''
                             echo "hello world"
                             '''
-                    } catch(error) {
-                        sh'''
-                        echo "woooo"
-                        '''
                     }
                 }
             }
+        } catch(error) {
+            sh'''
+                echo "woooo"
+                '''
         }
     }
 }
