@@ -12,6 +12,7 @@ pipeline {
                     script {
                         try {
                             sh'''
+                                date
                                 echo "hello world
                                 '''
                             true
