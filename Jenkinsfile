@@ -9,9 +9,15 @@ pipeline {
         stage('Input parameters') {
             steps {
                 waitUntil {
-                    sh'''
-                        echo "hello world"
+                    try {
+                        sh'''
+                            echo "hello world"
+                            '''
+                    } catch(error) {
+                        sh'''
+                        echo "woooo"
                         '''
+                    }
                 }
             }
         }
