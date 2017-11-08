@@ -8,17 +8,17 @@ pipeline {
     stages {
         stage('Input parameters') {
             steps {
-                waitUntil {
-                    script {
+                script {
+                    waitUntil {
                         try {
                             sh'''
                                 date
                                 echo "hello world
                                 '''
-                            true
+                                true
                         } catch(error) {
                             input "Retry the job?"
-                            false
+                                false
                         }
                     }
                 }
