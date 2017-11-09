@@ -8,7 +8,7 @@ def retry_script(String label, Closure body) {
             } catch(error) {
                 emailext (
                     subject: "Stage " + label + " failed!",
-                    body: 'See: ${env.BUILD_URL}',
+                    body: "See: ${env.BUILD_URL}",
                     recipientProviders: [[$class: 'DevelopersRecipientProvider'],
                                          [$class: 'RequesterRecipientProvider']]
                 )
