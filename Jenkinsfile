@@ -25,7 +25,7 @@ pipeline {
                 retry_script("test") {
                     sh'''
                         date
-                        echo "hello world
+                        echo "hello world"
                         '''
                 }
             }
