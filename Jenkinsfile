@@ -1,5 +1,18 @@
 #!/usr/bin/env groovy
 pipeline {
+    def retry_script(String label, Closure body) {
+        script {
+            waitUntil {
+                try {
+                    body.call()
+                        true
+                } catch(error) {
+                    input "Retry the job?"
+                        false
+                }
+            }
+        }
+    }
     agent {
         node {
             label 'rh-sso-pipeline'
@@ -8,19 +21,11 @@ pipeline {
     stages {
         stage('Input parameters') {
             steps {
-                script {
-                    waitUntil {
-                        try {
-                            sh'''
-                                date
-                                echo "hello world
-                                '''
-                                true
-                        } catch(error) {
-                            input "Retry the job?"
-                                false
-                        }
-                    }
+                retry_script("test") {
+                    sh'''
+                        date
+                        echo "hello world
+                        '''
                 }
             }
         }
