@@ -1,18 +1,19 @@
 #!/usr/bin/env groovy
-pipeline {
-    def retry_script(String label, Closure body) {
-        script {
-            waitUntil {
-                try {
-                    body.call()
-                        true
-                } catch(error) {
-                    input "Retry the job?"
-                        false
-                }
+def retry_script(String label, Closure body) {
+    script {
+        waitUntil {
+            try {
+                body.call()
+                true
+            } catch(error) {
+                input "Retry the job?"
+                false
             }
         }
     }
+}
+
+pipeline {
     agent {
         node {
             label 'rh-sso-pipeline'
@@ -31,3 +32,4 @@ pipeline {
         }
     }
 }
+
