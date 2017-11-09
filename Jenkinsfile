@@ -6,6 +6,12 @@ def retry_script(String label, Closure body) {
                 body.call()
                 true
             } catch(error) {
+                emailext (
+                    subject: "Stage " + label + " failed!",
+                    body: 'A Test EMail',
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider'],
+                                         [$class: 'RequesterRecipientProvider']]
+                )
                 input "Retry the job?"
                 false
             }
@@ -25,7 +31,7 @@ pipeline {
                 retry_script("test") {
                     sh'''
                         date
-                        echo "hello world"
+                        echo "hello world
                         '''
                 }
             }
