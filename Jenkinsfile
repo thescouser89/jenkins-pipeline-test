@@ -11,7 +11,7 @@ def retry_script(String label, Closure body) {
                     body: "See: ${env.BUILD_URL}",
                     recipientProviders: [[$class: 'DevelopersRecipientProvider'],
                                          [$class: 'RequesterRecipientProvider']],
-                    to: 'dcheung@redhat.com,hukhan@redhat.com'
+                    to: 'dcheung@redhat.com'
                 )
                 input "Try to re-run the stage?"
                 false
