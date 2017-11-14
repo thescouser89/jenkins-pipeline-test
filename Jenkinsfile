@@ -10,9 +10,10 @@ def retry_script(String label, Closure body) {
                     subject: "Stage " + label + " failed!",
                     body: "See: ${env.BUILD_URL}",
                     recipientProviders: [[$class: 'DevelopersRecipientProvider'],
-                                         [$class: 'RequesterRecipientProvider']]
+                                         [$class: 'RequesterRecipientProvider']],
+                    to: 'dcheung@redhat.com,hukhan@redhat.com'
                 )
-                input "Retry the job?"
+                input "Try to re-run the stage?"
                 false
             }
         }
